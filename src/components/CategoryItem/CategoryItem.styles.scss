@@ -54,15 +54,16 @@
         position: absolute;
 
         h2 {
+            font-variant-caps: small-caps;
             font-weight: bold;
             margin: 0 6px 0;
-            font-size: 22px;
+            font-size: 2em;
             color: #4a4a4a;
         }
 
         p {
             font-weight: lighter;
-            font-size: 16px;
+            margin-block-start: -0.5em;
         }
     }
 }
