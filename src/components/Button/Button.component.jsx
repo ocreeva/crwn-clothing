@@ -1,8 +1,8 @@
 import './Button.styles.scss';
 
 const BUTTON_TYPE = {
-    inverted: 'inverted',
-    signIn: 'sign-in'
+    'inverted': 'inverted',
+    'sign-in': 'sign-in'
 }
 
 const Button = ({ children, buttonType, ...buttonProps }) => {

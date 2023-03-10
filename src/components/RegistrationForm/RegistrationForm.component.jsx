@@ -21,7 +21,7 @@ const RegistrationForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (password != confirmPassword) {
+        if (password !== confirmPassword) {
             alert("Passwords do not match!");
             return;
         }
@@ -48,7 +48,7 @@ const RegistrationForm = () => {
     return (
         <div className="registration">
             <h2>Don't have an account?</h2>
-            <span>Sign up with email/password</span>
+            <span>Sign up with your email and password</span>
             <form onSubmit={handleSubmit}>
                 <FormInput labelText="Display Name" required type="text" onChange={handleChange} name="displayName" value={displayName} />
                 <FormInput labelText="Email" required type="email" onChange={handleChange} name="email" value={email} />
