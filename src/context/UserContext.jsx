@@ -15,7 +15,6 @@ export const UserProvider = ({ children }) => {
 
     useEffect(() => {
         return addAuthStateChangedCallback(async (user) => {
-            console.log("test");
             setUserAuth(user);
             if (user) {
                 setUserData(await createOrReadUserData(user, additionalProperties));
