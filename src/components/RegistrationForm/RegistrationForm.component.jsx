@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
-import { createUserDocumentFromAuth, registerUserWithEmailAndPassword } from '../../utility/firebase/firebase.utility';
+import { registerUserWithEmailAndPassword } from '../../utility/firebase/firebase.utility';
+import UserContext from '../../context/UserContext';
 
 import Button from '../Button/Button.component';
 import FormInput from '../FormInput/FormInput.component';
@@ -15,6 +16,7 @@ const defaultRegistration = {
 };
 
 const RegistrationForm = () => {
+    const { setAdditionalProperties } = useContext(UserContext);
     const [ registration, setRegistration ] = useState(defaultRegistration);
     const { displayName, email, password, confirmPassword } = registration;
 
@@ -28,9 +30,8 @@ const RegistrationForm = () => {
 
         try
         {
-            const { user } = await registerUserWithEmailAndPassword(email, password);
-            const userDocRef = await createUserDocumentFromAuth({ ...user, displayName });
-            setRegistration(defaultRegistration);
+            setAdditionalProperties({ displayName });
+            await registerUserWithEmailAndPassword(email, password);
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
                 alert("Email has already been registered.");

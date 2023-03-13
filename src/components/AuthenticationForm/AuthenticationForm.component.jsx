@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { signInWithEmailAndPassword, signInWithGooglePopup, createUserDocumentFromAuth } from '../../utility/firebase/firebase.utility';
+import { signInWithEmailAndPassword, signInWithGooglePopup } from '../../utility/firebase/firebase.utility';
 
 import Button from '../Button/Button.component';
 import FormInput from '../FormInput/FormInput.component';
@@ -21,9 +21,7 @@ const AuthenticationForm = () => {
 
         try
         {
-            const { user } = await signInWithEmailAndPassword(email, password);
-            const userDocRef = await createUserDocumentFromAuth(user);
-            setAuthentication(defaultAuthentication);
+            await signInWithEmailAndPassword(email, password);
         } catch (error) {
             if (error.code === 'auth/wrong-password') {
                 alert("Incorrect email or password")
@@ -39,8 +37,7 @@ const AuthenticationForm = () => {
     };
 
     const logGoogleUser = async () => {
-        const { user } = await signInWithGooglePopup();
-        const userDocRef = await createUserDocumentFromAuth(user);
+        await signInWithGooglePopup();
     };
 
     return (

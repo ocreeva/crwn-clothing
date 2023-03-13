@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { createUserWithEmailAndPassword, getAuth, signInWithPopup, signInWithEmailAndPassword as signInWithEmailAndPasswordImpl } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithPopup, signInWithEmailAndPassword as signInWithEmailAndPasswordImpl, signOut as signOutImpl } from 'firebase/auth';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
@@ -14,7 +14,13 @@ const firebaseConfig = {
   
 initializeApp(firebaseConfig);
 
+/** Auth methods **/
+
 const auth = getAuth();
+
+export const addAuthStateChangedCallback = (callback) => onAuthStateChanged(auth, callback);
+
+export const registerUserWithEmailAndPassword = (email, password) => createUserWithEmailAndPassword(auth, email, password);
 
 export const signInWithEmailAndPassword = (email, password) => signInWithEmailAndPasswordImpl(auth, email, password);
 
@@ -22,23 +28,28 @@ const googleAuthProvider = new GoogleAuthProvider();
 googleAuthProvider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleAuthProvider);
 
-export const db = getFirestore();
+export const signOut = () => signOutImpl(auth);
 
-export const createUserDocumentFromAuth = async (userAuth) => {
-    const userDocRef = doc(db, 'users', userAuth.uid);
-    const userSnapshot = await getDoc(userDocRef);
-    if (!userSnapshot.exists()) {
-        const { displayName, email } = userAuth;
-        const createdAt = new Date();
+/** Data methods **/
 
-        try {
-            await setDoc(userDocRef, { displayName, email, createdAt });
-        } catch (error) {
-            console.log('Error creating the user', error.message);
-        }
+const db = getFirestore();
+const getUserDocRef = (user) => doc(db, 'users', user.uid);
+const getUserDocSnapshot = (userDocRef) => getDoc(userDocRef);
+
+export const createOrReadUserData = async (user, additionalProperties) => {
+    const userDocRef = getUserDocRef(user);
+    const userDocSnapshot = await getUserDocSnapshot(userDocRef);
+    if (userDocSnapshot.exists()) {
+        return userDocSnapshot.data();
     }
 
-    return userDocRef;
+    const { displayName, email } = user;
+    const createdAt = new Date();
+    const userData = { createdAt, displayName, email, ...additionalProperties };
+    try {
+        await setDoc(userDocRef, userData);
+        return userData;
+    } catch (error) {
+        console.error("Error creating the user document:", error.message);
+    }
 }
-
-export const registerUserWithEmailAndPassword = (email, password) => createUserWithEmailAndPassword(auth, email, password);
