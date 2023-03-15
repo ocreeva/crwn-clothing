@@ -5,6 +5,8 @@ export const CartContext = createContext({
     toggleIsCartOpen: () => null,
     items: [],
     addItemToCart: (id) => null,
+    removeItemFromCart: (id) => null,
+    clearItemFromCart: (id) => null,
 });
 
 const _addItemToItems = (id, items) => {
@@ -15,7 +17,25 @@ const _addItemToItems = (id, items) => {
 
     item.quantity += 1;
     return [ ...items ];
-}
+};
+
+const _removeItemFromItems = (id, items) => {
+    const item = items.find(i => i.id === id);
+    if (!item) {
+        return items;
+    }
+
+    item.quantity -= 1;
+    if (item.quantity) {
+        return [ ...items ];
+    }
+
+    return items.filter(_ => _.id !== id);
+};
+
+const _clearItemFromItems = (id, items) => {
+    return items.filter(_ => _.id !== id);
+};
 
 export const CartProvider = ({ children }) => {
     const [ isCartOpen, setIsCartOpen ] = useState(false);
@@ -23,8 +43,10 @@ export const CartProvider = ({ children }) => {
 
     const [ items, setItems ] = useState([]);
     const addItemToCart = (id) => setItems(_addItemToItems(id, items));
+    const removeItemFromCart = (id) => setItems(_removeItemFromItems(id, items));
+    const clearItemFromCart = (id) => setItems(_clearItemFromItems(id, items));
 
-    const value = { isCartOpen, toggleIsCartOpen, items, addItemToCart };
+    const value = { isCartOpen, toggleIsCartOpen, items, addItemToCart, removeItemFromCart, clearItemFromCart };
     return <CartContext.Provider value={value}>{ children }</CartContext.Provider>
 }
 
