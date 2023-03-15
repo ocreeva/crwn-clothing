@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import CartContext from '../../context/CartContext';
 
 import Button from '../Button/Button.component';
+import CartItem from '../CartItem/CartItem.component';
 
 import './CartDropdown.styles.scss';
 
@@ -13,7 +14,7 @@ const CartDropdown = () => {
         <div className='cart-dropdown'>
             <div className='items'>
                 {items.map((item) => 
-                    <div>{item}</div>
+                    <CartItem key={item.id} item={item} />
                 )}
             </div>
             <Button>Go to Checkout</Button>
