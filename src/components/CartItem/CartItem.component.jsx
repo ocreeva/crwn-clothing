@@ -7,8 +7,8 @@ import './CartItem.styles.scss';
 const CartItem = ({ item }) => {
     const { id, quantity } = item;
 
-    const { getProductById } = useContext(ProductsContext);
-    const { imageUrl, name, price } = getProductById(id);
+    const { productById } = useContext(ProductsContext);
+    const { imageUrl, name, price } = productById[id];
 
     return (
         <div key={id} className='cart-item'>

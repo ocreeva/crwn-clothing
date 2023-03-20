@@ -7,10 +7,10 @@ import './CheckoutItem.styles.scss';
 
 const CheckoutItem = ({ item }) => {
     const { id, quantity } = item;
-    const { getProductById } = useContext(ProductsContext);
+    const { productById } = useContext(ProductsContext);
     const { addItemToCart, removeItemFromCart, clearItemFromCart } = useContext(CartContext);
 
-    const { imageUrl, name, price } = getProductById(id);
+    const { imageUrl, name, price } = productById[id];
 
     const handleIncrement = () => addItemToCart(id);
     const handleDecrement = () => removeItemFromCart(id);

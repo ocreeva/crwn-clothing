@@ -9,10 +9,10 @@ import './Checkout.styles.scss';
 
 const Checkout = () => {
     const { items } = useContext(CartContext);
-    const { getProductById } = useContext(ProductsContext);
+    const { productById } = useContext(ProductsContext);
 
     const total = items.reduce((total, {id, quantity}) => {
-        const { price } = getProductById(id);
+        const { price } = productById[id];
         return total + price * quantity;
     }, 0);
 

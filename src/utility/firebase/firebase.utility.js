@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithPopup, signInWithEmailAndPassword as signInWithEmailAndPasswordImpl, signOut as signOutImpl } from 'firebase/auth';
 import { GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { getFirestore, collection, doc, getDoc, setDoc, query, getDocs } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBfvlvx0cJhFIUguCwUtnva3rTHLRQYiuw",
@@ -52,4 +52,15 @@ export const createOrReadUserData = async (user, additionalProperties) => {
     } catch (error) {
         console.error("Error creating the user document:", error.message);
     }
-}
+};
+
+export const getCategoriesData = async () => {
+    const collectionRef = collection(db, 'categories');
+    const querySnapshot = await getDocs(query(collectionRef));
+    const categoryMap = querySnapshot.docs.reduce((acc, current) => {
+        const data = current.data();
+        acc[data.title.toLowerCase()] = data;
+        return acc;
+    }, {});
+    return categoryMap;
+};
