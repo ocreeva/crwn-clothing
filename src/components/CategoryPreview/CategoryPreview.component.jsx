@@ -9,7 +9,7 @@ const CategoryPreview = ({ id, category }) => {
     return (
         <div className='category-preview'>
             <h2>
-                <Link className='title' to={`/shop/${id}`}>{title}</Link>
+                <Link className='title' to={id}>{title}</Link>
             </h2>
             <div className='preview'>
                 { items.slice(0, 4).map(product => <ProductCard key={product.id} product={product} />)}
