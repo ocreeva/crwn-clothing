@@ -1,13 +1,32 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer } from "react";
 
 export const CartContext = createContext({
     isCartOpen: false,
     toggleIsCartOpen: () => null,
     items: [],
     addItemToCart: (id) => null,
-    removeItemFromCart: (id) => null,
     clearItemFromCart: (id) => null,
+    removeItemFromCart: (id) => null,
 });
+
+const cartActions = Object.freeze({
+    update: Symbol("update"),
+});
+
+const cartReducerInitial = {
+    isCartOpen: false,
+    items: [],
+};
+
+const cartReducer = (state, { type, payload }) => {
+    switch (type) {
+        case cartActions.update:
+            return { ...state, ...payload };
+
+        default:
+            throw new Error(`Unhandled type (${type}) in cartReducer`);
+    }
+}
 
 const _addItemToItems = (id, items) => {
     const item = items.find(i => i.id === id);
@@ -38,15 +57,15 @@ const _clearItemFromItems = (id, items) => {
 };
 
 export const CartProvider = ({ children }) => {
-    const [ isCartOpen, setIsCartOpen ] = useState(false);
-    const toggleIsCartOpen = () => setIsCartOpen(!isCartOpen);
+    const [ { isCartOpen, items }, cartDispatch ] = useReducer(cartReducer, cartReducerInitial);
 
-    const [ items, setItems ] = useState([]);
-    const addItemToCart = (id) => setItems(_addItemToItems(id, items));
-    const removeItemFromCart = (id) => setItems(_removeItemFromItems(id, items));
-    const clearItemFromCart = (id) => setItems(_clearItemFromItems(id, items));
+    const toggleIsCartOpen = () => cartDispatch({ type: cartActions.update, payload: { isCartOpen: !isCartOpen } });
 
-    const value = { isCartOpen, toggleIsCartOpen, items, addItemToCart, removeItemFromCart, clearItemFromCart };
+    const addItemToCart = (id) => cartDispatch({ type: cartActions.update, payload: { items: _addItemToItems(id, items) } });
+    const clearItemFromCart = (id) => cartDispatch({ type: cartActions.update, payload: { items: _clearItemFromItems(id, items) } });
+    const removeItemFromCart = (id) => cartDispatch({ type: cartActions.update, payload: { items: _removeItemFromItems(id, items) } });
+
+    const value = { isCartOpen, toggleIsCartOpen, items, addItemToCart, clearItemFromCart, removeItemFromCart };
     return <CartContext.Provider value={value}>{ children }</CartContext.Provider>
 }
 
