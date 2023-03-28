@@ -3,10 +3,11 @@ import { BrowserRouter } from "react-router-dom";
 import ContextProvider from "./context/ContextProvider";
 import DefaultRoutes from "./routes";
 
-import { authStateChangedEffect } from "./utility/auth.utility";
+import { authStateChangedEffect, loadProductsDataEffect } from "./store/effects";
 
 const App = () => {
-    useEffect(authStateChangedEffect);
+    useEffect(authStateChangedEffect, []);
+    useEffect(loadProductsDataEffect, []);
 
     return (
         <BrowserRouter>

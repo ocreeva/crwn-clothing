@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import ProductsContext from "../../../context/ProductsContext";
+import { useSelector } from "react-redux";
+import { productsSelector } from "../../../store/selectors";
 
 import { useParams } from "react-router-dom";
 
@@ -8,7 +8,7 @@ import ProductCard from "../../../components/ProductCard";
 
 const ShopCategoryPage = () => {
     const { category } = useParams();
-    const { productsByCategory } = useContext(ProductsContext);
+    const productsByCategory = useSelector(productsSelector.getProductsByCategory);
 
     const { items } = productsByCategory[category];
 

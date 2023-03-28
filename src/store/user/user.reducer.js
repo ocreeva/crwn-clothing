@@ -1,14 +1,14 @@
-import * as userType from "../constants/user.type";
+import * as userType from "./user.type";
 
 const initialState = {
-    userAuth: null,
-    userData: null,
+    auth: null,
+    data: null,
 };
 
 const userReducer = (state = initialState, { type, payload }) => {
     switch (type) {
-        case userType.update:
-            return { ...state, ...payload };
+        case userType.set:
+            return payload;
 
         default:
             return state;

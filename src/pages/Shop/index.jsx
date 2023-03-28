@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import ProductsContext from "../../context/ProductsContext";
+import { useSelector } from "react-redux";
+import { productsSelector } from "../../store/selectors";
 
 import CategoryPreview from "./components/CategoryPreview";
 
 const ShopPage = () => {
-    const { productsByCategory } = useContext(ProductsContext);
+    const productsByCategory = useSelector(productsSelector.getProductsByCategory);
 
     return (<>{
         Object.keys(productsByCategory).map(key => <CategoryPreview key={key} id={key} category={productsByCategory[key]} />)

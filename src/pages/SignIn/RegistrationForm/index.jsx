@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { registrationAction } from "../../../actions";
+import { registrationAction } from "../../../store/actions";
 
 import { useState } from "react";
 

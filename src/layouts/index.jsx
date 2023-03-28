@@ -2,7 +2,7 @@ import { useContext } from "react";
 import CartContext from "../context/CartContext";
 
 import { useSelector } from "react-redux";
-import { userSelector } from "../selectors";
+import { userSelector } from "../store/selectors";
 
 import { signOut } from "../utility/firebase/firebase.utility";
 

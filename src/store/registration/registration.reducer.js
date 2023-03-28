@@ -1,4 +1,4 @@
-import * as registrationType from "../constants/registration.type";
+import * as registrationType from "./registration.type";
 
 const initialState = {
     displayName: null,
