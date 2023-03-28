@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import UserContext from "../../../context/UserContext";
+import { useDispatch } from "react-redux";
+import { registrationAction } from "../../../actions";
 
 import { useState } from "react";
 
@@ -17,9 +17,10 @@ const defaultRegistration = {
 };
 
 const RegistrationForm = () => {
-    const { setAdditionalProperties } = useContext(UserContext);
     const [ registration, setRegistration ] = useState(defaultRegistration);
     const { displayName, email, password, confirmPassword } = registration;
+
+    const dispatch = useDispatch();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -31,7 +32,7 @@ const RegistrationForm = () => {
 
         try
         {
-            setAdditionalProperties({ displayName });
+            dispatch(registrationAction.update({ displayName }));
             await registerUserWithEmailAndPassword(email, password);
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {

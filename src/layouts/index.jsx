@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import CartContext from "../context/CartContext";
-import UserContext from "../context/UserContext";
+
+import { useSelector } from "react-redux";
+import { userSelector } from "../selectors";
 
 import { signOut } from "../utility/firebase/firebase.utility";
 
@@ -11,7 +13,7 @@ import ShoppingCartIcon from "../components/ShoppingCart/Icon";
 
 const DefaultLayout = () => {
     const { isCartOpen } = useContext(CartContext);
-    const { userAuth } = useContext(UserContext);
+    const userAuth = useSelector(userSelector.getUserAuth);
 
     return (<>
         <S.NavigationContainer>
