@@ -1,8 +1,5 @@
-import { useContext } from "react";
-import CartContext from "../context/CartContext";
-
 import { useSelector } from "react-redux";
-import { userSelector } from "../store/selectors";
+import { cartSelector, userSelector } from "../store/selectors";
 
 import { signOut } from "../services/auth";
 
@@ -12,7 +9,7 @@ import ShoppingCartDropdown from "../components/ShoppingCart/Dropdown";
 import ShoppingCartIcon from "../components/ShoppingCart/Icon";
 
 const DefaultLayout = () => {
-    const { isCartOpen } = useContext(CartContext);
+    const isDropdownOpen = useSelector(cartSelector.isDropdownOpen);
     const userAuth = useSelector(userSelector.getUserAuth);
 
     return (<>
@@ -35,7 +32,7 @@ const DefaultLayout = () => {
                 )}
                 <ShoppingCartIcon />
             </S.NavLinkCollection>
-            {isCartOpen && <ShoppingCartDropdown />}
+            {isDropdownOpen && <ShoppingCartDropdown />}
         </S.NavigationContainer>
         <Outlet />
     </>);

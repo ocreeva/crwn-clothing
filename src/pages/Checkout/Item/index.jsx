@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import CartContext from "../../../context/CartContext";
+import { useDispatch } from "react-redux";
+import { cartAction } from "../../../store/actions";
 
 import { useSelector } from "react-redux";
 import { productsSelector } from "../../../store/selectors";
@@ -9,11 +9,11 @@ import * as S from "./styles";
 const CheckoutItem = ({ item }) => {
     const { id, quantity } = item;
     const { imageUrl, name, price } = useSelector(productsSelector.getProductById(id));
-    const { addItemToCart, removeItemFromCart, clearItemFromCart } = useContext(CartContext);
 
-    const handleIncrement = () => addItemToCart(id);
-    const handleDecrement = () => removeItemFromCart(id);
-    const handleRemove = () => clearItemFromCart(id);
+    const dispatch = useDispatch();
+    const handleIncrement = () => dispatch(cartAction.addItem(id));
+    const handleDecrement = () => dispatch(cartAction.removeItem(id));
+    const handleRemove = () => dispatch(cartAction.clearItem(id));
 
     return (
         <S.CheckoutItem>

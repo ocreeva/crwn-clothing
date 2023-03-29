@@ -1,22 +1,12 @@
-import { useContext } from "react";
-import CartContext from "../../context/CartContext";
-
 import { useSelector } from "react-redux";
-import { productsSelector } from "../../store/selectors";
+import { cartSelector } from "../../store/selectors";
 
 import * as S from "./styles";
 import CheckoutItem from "./Item";
 
 const CheckoutPage = () => {
-    const { items } = useContext(CartContext);
-    /*
-    const productById = useSelector(productsSelector.getProductById);
-
-    const total = items.reduce((total, {id, quantity}) => {
-        const { price } = productById[id];
-        return total + price * quantity;
-    }, 0);*/
-    const total = 0;
+    const items = useSelector(cartSelector.getCartItems);
+    const total = useSelector(cartSelector.getCartTotal);
 
     return (
         <S.CheckoutPage>

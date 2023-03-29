@@ -1,13 +1,6 @@
 import { createSelector } from "reselect";
 
-const getProductsData = ({ products }) => products;
-const getCategories = createSelector(
-    [ getProductsData ],
-    ({ categories }) => {
-        console.log("getCategories: ", categories);
-        return categories;
-    }
-);
+const getCategories = ({ products }) => products.categories;
 const getCategoriesMap = createSelector(
     [ getCategories ],
     (categories) => categories.reduce(
@@ -17,7 +10,8 @@ const getCategoriesMap = createSelector(
         },
         {})
 );
-const getProductsMap = createSelector(
+
+export const getProductsMap = createSelector(
     [ getCategories ],
     (categories) => categories.reduce(
         (map, { items }) => {
