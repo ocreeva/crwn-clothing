@@ -1,8 +1,7 @@
 import * as productsType from "./products.type";
 
 const initialState = {
-    productsByCategory: {},
-    productById: {},
+    categories: [],
 };
 
 const productsReducer = (state = initialState, { type, payload }) =>

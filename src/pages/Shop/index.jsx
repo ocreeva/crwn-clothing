@@ -4,10 +4,10 @@ import { productsSelector } from "../../store/selectors";
 import CategoryPreview from "./components/CategoryPreview";
 
 const ShopPage = () => {
-    const productsByCategory = useSelector(productsSelector.getProductsByCategory);
+    const categoryIds = useSelector(productsSelector.getCategoryIds);
 
     return (<>{
-        Object.keys(productsByCategory).map(key => <CategoryPreview key={key} id={key} category={productsByCategory[key]} />)
+        categoryIds.map(id => <CategoryPreview key={id} id={id} />)
     }</>);
 };
 

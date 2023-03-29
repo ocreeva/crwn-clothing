@@ -8,9 +8,7 @@ import ProductCard from "../../../components/ProductCard";
 
 const ShopCategoryPage = () => {
     const { category } = useParams();
-    const productsByCategory = useSelector(productsSelector.getProductsByCategory);
-
-    const { items } = productsByCategory[category];
+    const { items } = useSelector(productsSelector.getCategoryById(category));
 
     return (<>
         <S.CategoryProductsCollection>

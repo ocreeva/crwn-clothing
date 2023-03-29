@@ -3,7 +3,7 @@ import { registrationAction } from "../../../store/actions";
 
 import { useState } from "react";
 
-import { registerUserWithEmailAndPassword } from "../../../utility/firebase/firebase.utility";
+import { registerUserWithEmailAndPassword } from "../../../services/auth";
 
 import * as S from "./styles";
 import Button from "../../../components/Button";

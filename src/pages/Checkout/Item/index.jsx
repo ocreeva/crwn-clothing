@@ -8,10 +8,8 @@ import * as S from "./styles";
 
 const CheckoutItem = ({ item }) => {
     const { id, quantity } = item;
-    const productById = useSelector(productsSelector.getProductById);
+    const { imageUrl, name, price } = useSelector(productsSelector.getProductById(id));
     const { addItemToCart, removeItemFromCart, clearItemFromCart } = useContext(CartContext);
-
-    const { imageUrl, name, price } = productById[id];
 
     const handleIncrement = () => addItemToCart(id);
     const handleDecrement = () => removeItemFromCart(id);

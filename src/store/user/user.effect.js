@@ -1,4 +1,5 @@
-import { addAuthStateChangedCallback, createOrReadUserData } from "../../utility/firebase/firebase.utility";
+import { addAuthStateChangedCallback } from "../../services/auth";
+import { createOrReadUserData } from "../../services/storage";
 
 import store from "..";
 import { userAction } from "../actions";

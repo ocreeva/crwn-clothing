@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { signInWithEmailAndPassword, signInWithGooglePopup } from "../../../utility/firebase/firebase.utility";
+import { signInWithEmailAndPassword, signInWithGooglePopup } from "../../../services/auth";
 
 import * as S from "./styles";
 import Button, { ButtonType } from "../../../components/Button";

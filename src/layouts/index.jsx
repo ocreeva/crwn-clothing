@@ -4,7 +4,7 @@ import CartContext from "../context/CartContext";
 import { useSelector } from "react-redux";
 import { userSelector } from "../store/selectors";
 
-import { signOut } from "../utility/firebase/firebase.utility";
+import { signOut } from "../services/auth";
 
 import * as S from "./styles";
 import { Outlet } from "react-router-dom";
