@@ -12,7 +12,7 @@ const App = () => {
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(productsAction.readDataAsync());
+        dispatch(productsAction.readData());
     }, [ dispatch ]);
 
     return (
