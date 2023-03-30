@@ -4,15 +4,19 @@ import { productsSelector } from "../../../store/selectors";
 import { useParams } from "react-router-dom";
 
 import * as S from "./styles";
+import LoadingGlyph from "../../../components/LoadingGlyph";
 import ProductCard from "../../../components/ProductCard";
 
 const ShopCategoryPage = () => {
     const { categoryId } = useParams();
     const category = useSelector(productsSelector.getCategoryById(categoryId));
-    if (!category) return;
+    const isLoading = useSelector(productsSelector.isLoading);
+
+    if (isLoading || !category) {
+        return (<LoadingGlyph />);
+    }
 
     const { items } = category;
-
     return (<>
         <S.CategoryProductsCollection>
             { items.map(product => <ProductCard key={product.id} product={product} />) }

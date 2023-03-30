@@ -35,3 +35,5 @@ export const getProductById = (id) => createSelector(
     [ getProductsMap ],
     (productsMap) => productsMap[id]
 );
+
+export const isLoading = ({ products }) => products.isLoading;

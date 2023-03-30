@@ -5,7 +5,10 @@ import * as S from "./styles";
 
 const ShoppingCartItem = ({ item }) => {
     const { id, quantity } = item;
-    const { imageUrl, name, price } = useSelector(productsSelector.getProductById(id));
+    const product = useSelector(productsSelector.getProductById(id));
+    if (!product) return;
+
+    const { imageUrl, name, price } = product;
 
     return (
         <S.ShoppingCartItem>
