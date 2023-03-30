@@ -1,10 +1,18 @@
 import { applyMiddleware, compose, createStore } from "redux";
+import { persistStore } from "redux-persist";
 import logger from "redux-logger";
 import rootReducer from "./reducers";
 
-const middleware = [ logger ];
-const enhancers = compose(applyMiddleware(...middleware));
+const composeMethod = (
+    process.env.NODE_ENV !== "production" &&
+    window &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+) || compose;
 
-const store = createStore(rootReducer, undefined, enhancers);
+const middleware = [ process.env.NODE_ENV !== "production" && logger ].filter(Boolean);
+const enhancers = composeMethod(applyMiddleware(...middleware));
+
+export const store = createStore(rootReducer, undefined, enhancers);
+export const persistor = persistStore(store);
 
 export default store;

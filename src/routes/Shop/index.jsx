@@ -7,7 +7,7 @@ const ShopRoute = () => {
     return (
         <Routes>
           <Route index element={<ShopPage />} />
-          <Route path=':category' element={<ShopCategoryPage />} />
+          <Route path=':categoryId' element={<ShopCategoryPage />} />
         </Routes>
     );
 }

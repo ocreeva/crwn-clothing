@@ -7,8 +7,11 @@ import * as S from "./styles";
 import ProductCard from "../../../components/ProductCard";
 
 const ShopCategoryPage = () => {
-    const { category } = useParams();
-    const { items } = useSelector(productsSelector.getCategoryById(category));
+    const { categoryId } = useParams();
+    const category = useSelector(productsSelector.getCategoryById(categoryId));
+    if (!category) return;
+
+    const { items } = category;
 
     return (<>
         <S.CategoryProductsCollection>
