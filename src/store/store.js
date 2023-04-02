@@ -1,24 +1,13 @@
-import { applyMiddleware, compose, createStore } from "redux";
-import { persistStore } from "redux-persist";
+import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
-import thunk from "redux-thunk";
 
-import rootReducer from "./reducers";
+import reducer from "./reducers";
 
-const composeMethod = (
-    process.env.NODE_ENV !== "production" &&
-    window &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-) || compose;
-
-const middleware = [
+const additionalMiddleware = [
     process.env.NODE_ENV !== "production" && logger,
-    thunk,
 ].filter(Boolean);
-const enhancers = composeMethod(applyMiddleware(...middleware));
 
-export const store = createStore(rootReducer, undefined, enhancers);
-
-export const persistor = persistStore(store);
-
-export default store;
+export default configureStore({
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(additionalMiddleware),
+    reducer,
+});
