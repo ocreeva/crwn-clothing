@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 
-import reducer from "./reducers";
+import reducer from "./reducer";
 
 const additionalMiddleware = [
     process.env.NODE_ENV !== "production" && logger,

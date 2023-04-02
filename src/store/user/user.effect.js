@@ -1,7 +1,7 @@
 import { addAuthStateChangedCallback } from "../../services/auth";
 import { createOrReadUserData } from "../../services/storage";
 
-import store from "../store";
+import store from "../../App/store";
 import { userAction } from "../actions";
 import { registrationSelector } from "../selectors";
 
