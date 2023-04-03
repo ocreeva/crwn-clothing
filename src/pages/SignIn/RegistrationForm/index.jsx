@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { registrationAction } from "../../../store/actions";
+import { setUserRegistrationProperties } from "../../../features/registration";
 
 import { useState } from "react";
 
@@ -32,7 +32,7 @@ const RegistrationForm = () => {
 
         try
         {
-            dispatch(registrationAction.update({ displayName }));
+            dispatch(setUserRegistrationProperties({ displayName }));
             await registerUserWithEmailAndPassword(email, password);
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {

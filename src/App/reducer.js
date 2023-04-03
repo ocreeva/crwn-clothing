@@ -6,7 +6,7 @@ import cartReducer from "../features/cart";
 import categoriesReducer from "../features/categories";
 import dropdownReducer from "../features/dropdown";
 import productsReducer from "../features/products";
-import registrationReducer from "../store/registration/registration.reducer";
+import registrationReducer from "../features/registration";
 import userReducer from "../features/user";
 
 const persistConfig = {
