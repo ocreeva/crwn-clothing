@@ -1,12 +1,14 @@
 import { useSelector } from "react-redux";
-import { cartSelector } from "../../store/selectors";
+import { selectCartItems, selectCartTotal } from "../../features/cart";
 
 import * as S from "./styles";
 import CheckoutItem from "./Item";
 
 const CheckoutPage = () => {
-    const items = useSelector(cartSelector.getCartItems);
-    const total = useSelector(cartSelector.getCartTotal);
+    const items = useSelector(selectCartItems);
+    const total = useSelector(selectCartTotal);
+
+    const productIds = Object.keys(items);
 
     return (
         <S.CheckoutPage>
@@ -17,7 +19,7 @@ const CheckoutPage = () => {
                 <S.ColumnHeading>Price</S.ColumnHeading>
                 <S.ColumnHeading>Remove</S.ColumnHeading>
             </S.PageHeader>
-            { items.map((item) => <CheckoutItem key={item.id} item={item} /> ) }
+            { productIds.map((productId) => <CheckoutItem key={productId} productId={productId} quantity={items[productId].quantity} /> ) }
             <S.TotalPrice>Total: ${total}</S.TotalPrice>
         </S.CheckoutPage>
     );

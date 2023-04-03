@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { cartAction } from "../../store/actions";
+import { addItemToCart } from "../../features/cart";
 
 import * as S from "./styles";
 import { ButtonType } from "../Button";
@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
     const { id, name, imageUrl, price } = product;
 
     const dispatch = useDispatch();
-    const handleAddToCart = () => dispatch(cartAction.addItem(id));
+    const handleAddToCart = () => dispatch(addItemToCart({ productId: id }));
 
     return (
         <S.ProductCard>

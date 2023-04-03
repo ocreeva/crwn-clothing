@@ -1,17 +1,17 @@
 import { useDispatch } from "react-redux";
-import { cartAction } from "../../../store/actions";
+import { toggleCartDropdown } from "../../../features/dropdown";
 
 import { useSelector } from "react-redux";
-import { cartSelector } from "../../../store/selectors";
+import { selectCartCount } from "../../../features/cart";
 
 import * as S from "./styles";
 
 const ShoppingCartIcon = () => {
-    const cartCount = useSelector(cartSelector.getCartCount);
+    const cartCount = useSelector(selectCartCount);
 
     const dispatch = useDispatch();
     const handleClick = () => {
-        dispatch(cartAction.toggleDropdown());
+        dispatch(toggleCartDropdown());
     }
 
     return (

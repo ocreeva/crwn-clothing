@@ -3,9 +3,8 @@ import { selectProductById } from "../../../features/products";
 
 import * as S from "./styles";
 
-const ShoppingCartItem = ({ item }) => {
-    const { id, quantity } = item;
-    const product = useSelector(state => selectProductById(state, id));
+const ShoppingCartItem = ({ productId, quantity }) => {
+    const product = useSelector(state => selectProductById(state, productId));
     if (!product) return;
 
     const { imageUrl, name, price } = product;

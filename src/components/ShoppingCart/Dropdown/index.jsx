@@ -1,23 +1,24 @@
 import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
-import { cartSelector } from "../../../store/selectors";
+import { selectCartItems } from "../../../features/cart";
 
 import * as S from "./styles";
 import Button from "../../Button";
 import ShoppingCartItem from "../Item";
 
 const ShoppingCartDropdown = () => {
-    const items = useSelector(cartSelector.getCartItems);
+    const items = useSelector(selectCartItems);
+    const productIds = Object.keys(items);
 
     const navigate = useNavigate();
     const handleGoToCheckout = () => navigate("/checkout");
 
     return (
         <S.ShoppingCartDropdown>
-            {items.length ? (
+            {productIds.length ? (
                 <S.DropdownItems>{
-                    items.map(item => <ShoppingCartItem key={item.id} item={item} />)
+                    productIds.map(productId => <ShoppingCartItem key={productId} productId={productId} quantity={items[productId].quantity} />)
                 }</S.DropdownItems>
             ) : (
                 <S.DropdownEmpty>Your cart is empty.</S.DropdownEmpty>
