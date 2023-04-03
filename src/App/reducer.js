@@ -7,7 +7,7 @@ import categoriesReducer from "../features/categories";
 import dropdownReducer from "../features/dropdown";
 import productsReducer from "../features/products";
 import registrationReducer from "../store/registration/registration.reducer";
-import userReducer from "../store/user/user.reducer";
+import userReducer from "../features/user";
 
 const persistConfig = {
     key: "root",

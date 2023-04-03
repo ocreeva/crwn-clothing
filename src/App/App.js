@@ -6,12 +6,11 @@ import { useDispatch } from "react-redux";
 import { readCategoriesDataAsync } from "../features/categories";
 import { readProductsDataAsync } from "../features/products";
 
-import { authStateChangedEffect } from "../store/effects";
+import { authStateChangedEffect } from "../features/user";
 
 const App = () => {
-    useEffect(authStateChangedEffect, []);
-
     const dispatch = useDispatch();
+    useEffect(() => authStateChangedEffect(dispatch, {}), [ dispatch ]);
     useEffect(() => { dispatch(readCategoriesDataAsync()); }, [ dispatch ]);
     useEffect(() => { dispatch(readProductsDataAsync()); }, [ dispatch ]);
 

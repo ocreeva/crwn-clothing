@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectCartDropdownIsOpen } from "../features/dropdown";
-import { userSelector } from "../store/selectors";
+import { selectUserAuth } from "../features/user";
 
 import { signOut } from "../services/auth";
 
@@ -11,7 +11,7 @@ import ShoppingCartIcon from "../components/ShoppingCart/Icon";
 
 const DefaultLayout = () => {
     const cartDropdownIsOpen = useSelector(selectCartDropdownIsOpen);
-    const userAuth = useSelector(userSelector.getUserAuth);
+    const userAuth = useSelector(selectUserAuth);
 
     return (<>
         <S.NavigationContainer>
