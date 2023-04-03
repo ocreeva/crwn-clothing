@@ -34,5 +34,17 @@ export const createOrReadUserData = async (user, additionalProperties) => {
 export const readCategoriesData = async () => {
     const collectionRef = collection(db, 'categories');
     const querySnapshot = await getDocs(query(collectionRef));
-    return querySnapshot.docs.map(doc => doc.data());
+    return querySnapshot.docs.reduce((map, doc) => {
+        map[doc.id] = { ...doc.data(), id: doc.id };
+        return map;
+    }, {});
 };
+
+export const readProductsData = async () => {
+    const collectionRef = collection(db, "products");
+    const querySnapshot = await getDocs(query(collectionRef));
+    return querySnapshot.docs.reduce((map, doc) => {
+        map[doc.id] = { ...doc.data(), id: doc.id };
+        return map;
+    }, {});
+}

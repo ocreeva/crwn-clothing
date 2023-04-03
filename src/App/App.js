@@ -3,7 +3,8 @@ import { BrowserRouter } from "react-router-dom";
 import DefaultRoutes from "../routes";
 
 import { useDispatch } from "react-redux";
-import { productsAction } from "../store/actions";
+import { readCategoriesDataAsync } from "../features/categories";
+import { readProductsDataAsync } from "../features/products";
 
 import { authStateChangedEffect } from "../store/effects";
 
@@ -11,9 +12,8 @@ const App = () => {
     useEffect(authStateChangedEffect, []);
 
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(productsAction.readDataAsync());
-    }, [ dispatch ]);
+    useEffect(() => { dispatch(readCategoriesDataAsync()); }, [ dispatch ]);
+    useEffect(() => { dispatch(readProductsDataAsync()); }, [ dispatch ]);
 
     return (
         <BrowserRouter>

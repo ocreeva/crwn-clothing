@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { getProductsMap } from "../products/products.selector";
+import { selectProductsData } from "../../features/products";
 
 export const isDropdownOpen = ({ cart }) => cart.isDropdownOpen;
 
@@ -11,8 +11,8 @@ export const getCartCount = createSelector(
 );
 
 export const getCartTotal = createSelector(
-    [ getCartItems, getProductsMap ],
-    (items, productsMap) => items.reduce(
-        (total, { id, quantity }) => total + quantity * productsMap[id].price,
+    [ getCartItems, selectProductsData ],
+    (items, productsData) => items.reduce(
+        (total, { id, quantity }) => total + quantity * productsData[id].price,
         0)
 );

@@ -2,13 +2,13 @@ import { useDispatch } from "react-redux";
 import { cartAction } from "../../../store/actions";
 
 import { useSelector } from "react-redux";
-import { productsSelector } from "../../../store/selectors";
+import { selectProductById } from "../../../features/products";
 
 import * as S from "./styles";
 
 const CheckoutItem = ({ item }) => {
     const { id, quantity } = item;
-    const { imageUrl, name, price } = useSelector(productsSelector.getProductById(id));
+    const { imageUrl, name, price } = useSelector(state => selectProductById(state, id));
 
     const dispatch = useDispatch();
     const handleIncrement = () => dispatch(cartAction.addItem(id));

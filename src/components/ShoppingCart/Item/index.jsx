@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
-import { productsSelector } from "../../../store/selectors";
+import { selectProductById } from "../../../features/products";
 
 import * as S from "./styles";
 
 const ShoppingCartItem = ({ item }) => {
     const { id, quantity } = item;
-    const product = useSelector(productsSelector.getProductById(id));
+    const product = useSelector(state => selectProductById(state, id));
     if (!product) return;
 
     const { imageUrl, name, price } = product;

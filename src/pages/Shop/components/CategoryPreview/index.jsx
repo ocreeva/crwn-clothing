@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux";
-import { productsSelector } from "../../../../store/selectors";
+import { selectCategoryById } from "../../../../features/categories";
+import { selectProductsByCategory } from "../../../../features/products";
 
 import * as S from "./styles";
 import ProductCard from "../../../../components/ProductCard";
 
 const CategoryPreview = ({ id }) => {
-    const { title, items } = useSelector(productsSelector.getCategoryById(id));
+    const { title } = useSelector(state => selectCategoryById(state, id));
+    const items = useSelector(state => selectProductsByCategory(state, id));
 
     return (
         <S.CategoryPreview>

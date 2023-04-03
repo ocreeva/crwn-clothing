@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
-import { productsSelector } from "../../../store/selectors";
+import { selectProductsByCategory, selectProductsAsyncState } from "../../../features/products";
+import asyncStatus from "../../../constants/asyncStatus";
 
 import { useParams } from "react-router-dom";
 
@@ -9,17 +10,16 @@ import ProductCard from "../../../components/ProductCard";
 
 const ShopCategoryPage = () => {
     const { categoryId } = useParams();
-    const category = useSelector(productsSelector.getCategoryById(categoryId));
-    const isLoading = useSelector(productsSelector.isLoading);
+    const products = useSelector(state => selectProductsByCategory(state, categoryId));
+    const asyncState = useSelector(selectProductsAsyncState);
 
-    if (isLoading || !category) {
+    if (asyncState.status !== asyncStatus.succeeded) {
         return (<LoadingGlyph />);
     }
 
-    const { items } = category;
     return (<>
         <S.CategoryProductsCollection>
-            { items.map(product => <ProductCard key={product.id} product={product} />) }
+            { products.map(product => <ProductCard key={product.id} product={product} />) }
         </S.CategoryProductsCollection>
     </>);
 }

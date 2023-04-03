@@ -1,14 +1,15 @@
 import { useSelector } from "react-redux";
-import { productsSelector } from "../../store/selectors";
+import { selectCategoryIds, selectCategoriesAsyncState } from "../../features/categories";
+import asyncStatus from "../../constants/asyncStatus";
 
 import CategoryPreview from "./components/CategoryPreview";
 import LoadingGlyph from "../../components/LoadingGlyph";
 
 const ShopPage = () => {
-    const categoryIds = useSelector(productsSelector.getCategoryIds);
-    const isLoading = useSelector(productsSelector.isLoading);
+    const categoryIds = useSelector(selectCategoryIds);
+    const asyncState = useSelector(selectCategoriesAsyncState);
 
-    if (isLoading) return (<LoadingGlyph />);
+    if (asyncState.status !== asyncStatus.succeeded) return (<LoadingGlyph />);
 
     return (<>{
         categoryIds.map(id => <CategoryPreview key={id} id={id} />)

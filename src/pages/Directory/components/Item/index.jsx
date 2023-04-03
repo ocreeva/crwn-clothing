@@ -1,12 +1,22 @@
 import { useNavigate } from 'react-router-dom';
 
-import * as S from './styles';
+import { useSelector } from 'react-redux';
+import { selectCategoryById, selectCategoriesAsyncState } from '../../../../features/categories';
+import asyncStatus from '../../../../constants/asyncStatus';
 
-const DirectoryItem = ({category}) => {
+import * as S from './styles';
+import LoadingGlyph from "../../../../components/LoadingGlyph";
+
+const DirectoryItem = ({ categoryId }) => {
+    const navigate = useNavigate();
+    const asyncState = useSelector(selectCategoriesAsyncState);
+    const category = useSelector(state => selectCategoryById(state, categoryId));
+
+    if (asyncState.status !== asyncStatus.succeeded) return (<LoadingGlyph />);
+
     const { title, imageUrl } = category;
 
-    const navigate = useNavigate();
-    const handleClick = () => navigate(`/shop/${title}`);
+    const handleClick = () => navigate(`/shop/${categoryId}`);
 
     return (
         <S.DirectoryItem>
