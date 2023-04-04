@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
+import { PaymentProvider } from "../services/payments";
 import DefaultRoutes from "../routes";
 
 import { useDispatch } from "react-redux";
@@ -21,7 +22,9 @@ const App = () => {
 
     return (
         <BrowserRouter>
-            <DefaultRoutes />
+            <PaymentProvider>
+                <DefaultRoutes />
+            </PaymentProvider>
         </BrowserRouter>
     );
 };

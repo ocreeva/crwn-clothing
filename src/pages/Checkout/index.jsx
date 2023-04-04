@@ -3,6 +3,7 @@ import { selectCartItems, selectCartTotal } from "../../features/cart";
 
 import * as S from "./styles";
 import CheckoutItem from "./Item";
+import PaymentForm from "./PaymentForm";
 
 const CheckoutPage = () => {
     const items = useSelector(selectCartItems);
@@ -21,6 +22,7 @@ const CheckoutPage = () => {
             </S.PageHeader>
             { productIds.map((productId) => <CheckoutItem key={productId} productId={productId} quantity={items[productId].quantity} /> ) }
             <S.TotalPrice>Total: ${total}</S.TotalPrice>
+            <PaymentForm />
         </S.CheckoutPage>
     );
 };

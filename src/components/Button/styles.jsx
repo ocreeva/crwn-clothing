@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { LoadingGlyphImage } from "../LoadingGlyph/LoadingGlyph.styles";
+
 export const Button = styled.button`
     min-width: 145px;
     width: auto;
@@ -16,6 +18,7 @@ export const Button = styled.button`
     cursor: pointer;
     display: flex;
     justify-content: center;
+    align-items: center;
 
     &:hover {
         background-color: white;
@@ -44,4 +47,9 @@ export const SignInButton = styled(Button)`
         background-color: #357ae8;
         border: none;
     }
+`;
+
+export const ButtonLoadingImage = styled(LoadingGlyphImage)`
+    width: 30px;
+    height: 30px;
 `;

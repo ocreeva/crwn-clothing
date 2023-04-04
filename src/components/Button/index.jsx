@@ -12,9 +12,13 @@ const getTypedButton = (buttonType) => ({
     [ButtonType.SignIn]: S.SignInButton,
 }[buttonType]);
 
-const Button = ({ children, buttonType = ButtonType.Default, ...buttonProps }) => {
+const Button = ({ children, buttonType = ButtonType.Default, isLoading, ...buttonProps }) => {
     const TypedButton = getTypedButton(buttonType);
-    return (<TypedButton {...buttonProps}>{ children }</TypedButton>);
+    return (
+        <TypedButton disabled={isLoading} {...buttonProps}>
+            { isLoading ? <S.ButtonLoadingImage /> : children }
+        </TypedButton>
+    );
 }
 
 export default Button;
