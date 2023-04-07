@@ -7,15 +7,17 @@ import {
     signInWithEmailAndPassword as signInWithEmailAndPasswordImpl,
     signOut as signOutImpl,
     GoogleAuthProvider,
+    NextOrObserver,
+    User,
 } from 'firebase/auth';
 
 const auth = getAuth();
 
-export const addAuthStateChangedCallback = (callback) => onAuthStateChanged(auth, callback);
+export const addAuthStateChangedCallback = (callback: NextOrObserver<User>) => onAuthStateChanged(auth, callback);
 
-export const registerUserWithEmailAndPassword = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+export const registerUserWithEmailAndPassword = (email: string, password: string) => createUserWithEmailAndPassword(auth, email, password);
 
-export const signInWithEmailAndPassword = (email, password) => signInWithEmailAndPasswordImpl(auth, email, password);
+export const signInWithEmailAndPassword = (email: string, password: string) => signInWithEmailAndPasswordImpl(auth, email, password);
 
 const googleAuthProvider = new GoogleAuthProvider();
 googleAuthProvider.setCustomParameters({ prompt: "select_account" });

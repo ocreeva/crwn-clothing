@@ -1,6 +1,6 @@
-import { initializeApp } from 'firebase/app';
+import { FirebaseOptions, initializeApp } from 'firebase/app';
 
-const firebaseConfig = {
+const firebaseConfig: FirebaseOptions = {
     apiKey: "AIzaSyBfvlvx0cJhFIUguCwUtnva3rTHLRQYiuw",
     authDomain: "moyba-clothing.firebaseapp.com",
     projectId: "moyba-clothing",
