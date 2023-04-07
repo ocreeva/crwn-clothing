@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 import { selectCategoryById, selectCategoriesAsyncState } from '../../../../features/categories';
-import asyncStatus from '../../../../constants/asyncStatus';
+import { AsyncStatus } from '../../../../features/async';
 
 import * as S from './styles';
 import LoadingGlyph from "../../../../components/LoadingGlyph";
@@ -12,7 +12,7 @@ const DirectoryItem = ({ categoryId }) => {
     const asyncState = useSelector(selectCategoriesAsyncState);
     const category = useSelector(state => selectCategoryById(state, categoryId));
 
-    if (asyncState.status !== asyncStatus.succeeded) return (<LoadingGlyph />);
+    if (asyncState.status !== AsyncStatus.succeeded) return (<LoadingGlyph />);
 
     const { title, imageUrl } = category;
 

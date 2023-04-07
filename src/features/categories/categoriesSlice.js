@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import asyncStatus from "../../constants/asyncStatus";
+import { AsyncStatus } from "../async";
 import extraReducers from "./categoriesSlice.thunks";
 
 const initialState = {
     data: {},
     async: {
-        status: asyncStatus.idle,
+        status: AsyncStatus.idle,
         error: null,
         requestId: null,
     },

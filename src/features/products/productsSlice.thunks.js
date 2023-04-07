@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import asyncStatus from "../../constants/asyncStatus";
+import { AsyncStatus } from "../async";
 import { readProductsData } from "../../services/storage";
 
 export const readProductsDataAsync = createAsyncThunk(
@@ -13,18 +13,18 @@ export const readProductsDataAsync = createAsyncThunk(
 
 const extraReducers = (builder) => { builder
     .addCase(readProductsDataAsync.pending, (state, { meta: { requestId } }) => {
-        if (state.async.status !== asyncStatus.idle) return;
-        state.async.status = asyncStatus.executing;
+        if (state.async.status !== AsyncStatus.idle) return;
+        state.async.status = AsyncStatus.executing;
         state.async.requestId = requestId;
     })
     .addCase(readProductsDataAsync.fulfilled, (state, { payload, meta: { requestId } }) => {
         if (state.async.requestId !== requestId) return;
-        state.async.status = asyncStatus.succeeded;
+        state.async.status = AsyncStatus.succeeded;
         state.data = payload;
     })
     .addCase(readProductsDataAsync.rejected, (state, { error, meta: { requestId } }) => {
         if (state.async.requestId !== requestId) return;
-        state.async.status = asyncStatus.failed;
+        state.async.status = AsyncStatus.failed;
         state.async.error = error;
     })
 };
