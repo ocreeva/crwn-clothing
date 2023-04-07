@@ -1,7 +1,8 @@
 import { User } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import db from "./firestore.db";
-import { IRegistrationProperties, IUser } from "@/features/user";
+
+import type { IRegistrationProperties, IUser } from "@/features/user";
 
 export const createOrReadUserData = async (user: User, additionalProperties: IRegistrationProperties): Promise<IUser | undefined> => {
     const userDocRef = doc(db.users, user.uid);
