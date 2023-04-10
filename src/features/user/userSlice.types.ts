@@ -16,4 +16,6 @@ export interface IUserData {
 export interface IUserState {
     auth?: IUserAuth;
     data?: IUserData;
+
+    registrationProperties?: IRegistrationProperties;
 }

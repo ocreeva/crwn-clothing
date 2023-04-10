@@ -6,7 +6,6 @@ import cartReducer from "../features/cart";
 import categoriesReducer from "../features/categories";
 import dropdownReducer from "../features/dropdown";
 import productsReducer from "../features/products";
-import registrationReducer from "../features/registration";
 import userReducer from "../features/user";
 
 const persistConfig = {
@@ -22,7 +21,6 @@ const rootReducer = persistReducer(
         categories: categoriesReducer,
         dropdown: dropdownReducer,
         products: productsReducer,
-        registration: registrationReducer,
         user: userReducer,
     }));
 
