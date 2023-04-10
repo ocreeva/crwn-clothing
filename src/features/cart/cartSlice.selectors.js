@@ -1,6 +1,5 @@
 import { createSelector } from "reselect";
-import { selectProductsAsyncState, selectProductsData } from "../products";
-import { AsyncStatus } from "../async";
+import { selectProductsAreLoaded, selectProductsData } from "../products";
 
 export const selectCartItems = ({ cart }) => cart.items;
 
@@ -10,9 +9,9 @@ export const selectCartCount = createSelector(
 );
 
 export const selectCartTotal = createSelector(
-    [ selectCartItems, selectProductsData, selectProductsAsyncState ],
-    (items, products, asyncState) => {
-        if (asyncState.status !== AsyncStatus.succeeded) return 0;
+    [ selectCartItems, selectProductsData, selectProductsAreLoaded ],
+    (items, products, productsAreLoaded) => {
+        if (!productsAreLoaded) return 0;
         return Object.keys(items).reduce(
             (total, productId) => total + items[productId].quantity * products[productId].price,
             0);

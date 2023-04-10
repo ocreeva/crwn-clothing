@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectProductsByCategory, selectProductsAsyncState } from "../../../features/products";
-import { AsyncStatus } from "../../../features/async";
+import { selectProductsByCategory, selectProductsAreLoaded } from "../../../features/products";
 
 import { useParams } from "react-router-dom";
 
@@ -11,11 +10,9 @@ import ProductCard from "../../../components/ProductCard";
 const ShopCategoryPage = () => {
     const { categoryId } = useParams();
     const products = useSelector(state => selectProductsByCategory(state, categoryId));
-    const asyncState = useSelector(selectProductsAsyncState);
+    const productsAreLoaded = useSelector(selectProductsAreLoaded);
 
-    if (asyncState.status !== AsyncStatus.succeeded) {
-        return (<LoadingGlyph />);
-    }
+    if (!productsAreLoaded) return (<LoadingGlyph />);
 
     return (<>
         <S.CategoryProductsCollection>
