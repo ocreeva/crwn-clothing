@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 import * as reducers from "./dropdownSlice.reducers";
 
-const initialState = {
+import type { IDropdownState } from "./dropdownSlice.types";
+
+const initialState: IDropdownState = {
     cartDropdownIsOpen: false,
 };
 
