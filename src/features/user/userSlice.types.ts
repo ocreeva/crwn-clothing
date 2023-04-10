@@ -2,9 +2,18 @@ export interface IRegistrationProperties {
     displayName?: string;
 }
 
-export interface IUser {
+export interface IUserAuth {
+    uid: string;
+}
+
+export interface IUserData {
     id: string;
-    createdAt: Date;
+    createdAtISO: string;
     displayName: string | null;
     email: string | null;
+}
+
+export interface IUserState {
+    auth?: IUserAuth;
+    data?: IUserData;
 }

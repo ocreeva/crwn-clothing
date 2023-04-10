@@ -2,9 +2,9 @@ import { User } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import db from "./firestore.db";
 
-import type { IRegistrationProperties, IUser } from "features/user";
+import type { IRegistrationProperties, IUserData } from "features/user";
 
-export const createOrReadUserData = async (user: User, additionalProperties: IRegistrationProperties): Promise<IUser | undefined> => {
+export const createOrReadUserData = async (user: User, registrationProperties: IRegistrationProperties): Promise<IUserData | undefined> => {
     const userDocRef = doc(db.users, user.uid);
     const userDocSnapshot = await getDoc(userDocRef);
     if (userDocSnapshot.exists()) {
@@ -13,7 +13,8 @@ export const createOrReadUserData = async (user: User, additionalProperties: IRe
 
     const { displayName, email } = user;
     const createdAt = new Date();
-    const userData = { id: user.uid, createdAt, displayName, email, ...additionalProperties };
+    const createdAtISO = createdAt.toISOString();
+    const userData = { id: user.uid, createdAtISO, displayName, email, ...registrationProperties };
     try {
         await setDoc(userDocRef, userData);
         return userData;
