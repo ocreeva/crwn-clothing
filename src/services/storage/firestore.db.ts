@@ -1,9 +1,9 @@
 import { Firestore, QueryDocumentSnapshot, collection, getFirestore } from "firebase/firestore";
 import "../firebase";
 
-import type { IUser } from "@/features/user";
-import type { ICategory } from "@/features/categories";
-import type { IProduct } from "@/features/products";
+import type { IUser } from "features/user";
+import type { ICategory } from "features/categories";
+import type { IProduct } from "features/products";
 
 const firestore: Firestore = getFirestore();
 

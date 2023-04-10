@@ -1,7 +1,7 @@
 import { getDocs, query } from "firebase/firestore";
 import db from "./firestore.db";
 
-import type { ICategory } from "@/features/categories";
+import type { ICategory } from "features/categories";
 
 export const readCategoriesData = async (): Promise<Record<string, ICategory>> => {
     const querySnapshot = await getDocs(query(db.categories));
