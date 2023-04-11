@@ -1,10 +1,17 @@
 import { useDispatch } from "react-redux";
-import { addItemToCart } from "../../features/cart";
+import { addItemToCart } from "features/cart";
 
-import * as S from "./styles";
-import { ButtonType } from "../Button";
+import * as S from "./ProductCard.styles";
+import { ButtonType } from "components/Button";
 
-const ProductCard = ({ product }) => {
+import type { FC } from "react";
+import type { IProduct } from "features/products";
+
+type ProductCardProps = {
+    product: IProduct;
+}
+
+const ProductCard: FC<ProductCardProps> = ({ product }) => {
     const { id, name, imageUrl, price } = product;
 
     const dispatch = useDispatch();

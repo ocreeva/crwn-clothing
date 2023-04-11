@@ -11,8 +11,8 @@ const getTypedButton: (buttonType: ButtonType) => typeof S.Button = (buttonType)
 }[buttonType]);
 
 type ButtonProps = {
-    buttonType: ButtonType;
-    isLoading: boolean;
+    buttonType?: ButtonType;
+    isLoading?: boolean;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button: FC<PropsWithChildren<ButtonProps>> = ({ children, buttonType = ButtonType.Default, isLoading = false, ...buttonProps }) => {
