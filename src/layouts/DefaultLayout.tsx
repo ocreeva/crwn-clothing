@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useAppSelector } from "App/hooks";
 import { selectCartDropdownIsOpen } from "features/dropdown";
 import { selectUserIsSignedIn } from "features/user";
 
@@ -12,8 +12,8 @@ import ShoppingCartIcon from "components/ShoppingCart/Icon";
 import type { FC } from "react";
 
 const DefaultLayout: FC = () => {
-    const cartDropdownIsOpen = useSelector(selectCartDropdownIsOpen);
-    const userIsSignedIn = useSelector(selectUserIsSignedIn);
+    const cartDropdownIsOpen = useAppSelector(selectCartDropdownIsOpen);
+    const userIsSignedIn = useAppSelector(selectUserIsSignedIn);
 
     return (<>
         <S.NavigationContainer>

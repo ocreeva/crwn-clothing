@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "App/hooks";
 import { addItemToCart } from "features/cart";
 
 import * as S from "./ProductCard.styles";
@@ -14,7 +14,7 @@ type ProductCardProps = {
 const ProductCard: FC<ProductCardProps> = ({ product }) => {
     const { id, name, imageUrl, price } = product;
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const handleAddToCart = () => dispatch(addItemToCart({ productId: id }));
 
     return (

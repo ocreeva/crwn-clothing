@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import { useSelector } from "react-redux";
+import { useAppSelector } from "App/hooks";
 import { selectCartItems } from "features/cart";
 
 import * as S from "./ShoppingCartDropdown.styles";
@@ -8,7 +8,7 @@ import Button from "components/Button";
 import ShoppingCartItem from "../Item";
 
 const ShoppingCartDropdown = () => {
-    const items = useSelector(selectCartItems);
+    const items = useAppSelector(selectCartItems);
     const productIds = Object.keys(items);
 
     const navigate = useNavigate();

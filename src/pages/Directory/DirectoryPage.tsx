@@ -1,4 +1,4 @@
-import * as S from "./styles";
+import * as S from "./DirectoryPage.styles";
 import DirectoryItem from "./components/Item";
 
 const categoryOrder = [

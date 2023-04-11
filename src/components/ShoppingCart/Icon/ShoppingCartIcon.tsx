@@ -1,7 +1,7 @@
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "App/hooks";
 import { toggleCartDropdown } from "features/dropdown";
 
-import { useSelector } from "react-redux";
+import { useAppSelector } from "App/hooks";
 import { selectCartCount } from "features/cart";
 
 import * as S from "./ShoppingCartIcon.styles";
@@ -9,9 +9,9 @@ import * as S from "./ShoppingCartIcon.styles";
 import type { FC } from "react";
 
 const ShoppingCartIcon: FC = () => {
-    const cartCount = useSelector(selectCartCount);
+    const cartCount = useAppSelector(selectCartCount);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const handleClick = () => {
         dispatch(toggleCartDropdown());
     }
