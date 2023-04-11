@@ -4,9 +4,11 @@ import { toggleCartDropdown } from "../../../features/dropdown";
 import { useSelector } from "react-redux";
 import { selectCartCount } from "../../../features/cart";
 
-import * as S from "./styles";
+import * as S from "./ShoppingCartIcon.styles";
 
-const ShoppingCartIcon = () => {
+import type { FC } from "react";
+
+const ShoppingCartIcon: FC = () => {
     const cartCount = useSelector(selectCartCount);
 
     const dispatch = useDispatch();

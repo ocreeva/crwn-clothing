@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
 import { useSelector } from "react-redux";
-import { selectCartItems } from "../../../features/cart";
+import { selectCartItems } from "features/cart";
 
-import * as S from "./styles";
-import Button from "../../Button";
+import * as S from "./ShoppingCartDropdown.styles";
+import Button from "components/Button";
 import ShoppingCartItem from "../Item";
 
 const ShoppingCartDropdown = () => {
@@ -18,7 +18,7 @@ const ShoppingCartDropdown = () => {
         <S.ShoppingCartDropdown>
             {productIds.length ? (
                 <S.DropdownItems>{
-                    productIds.map(productId => <ShoppingCartItem key={productId} productId={productId} quantity={items[productId].quantity} />)
+                    productIds.map(productId => <ShoppingCartItem key={productId} item={items[productId]} />)
                 }</S.DropdownItems>
             ) : (
                 <S.DropdownEmpty>Your cart is empty.</S.DropdownEmpty>
