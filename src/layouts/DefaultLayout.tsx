@@ -1,17 +1,19 @@
 import { useSelector } from "react-redux";
-import { selectCartDropdownIsOpen } from "../features/dropdown";
-import { selectUserAuth } from "../features/user";
+import { selectCartDropdownIsOpen } from "features/dropdown";
+import { selectUserIsSignedIn } from "features/user";
 
-import { signOut } from "../services/auth";
+import { signOut } from "services/auth";
 
-import * as S from "./styles";
+import * as S from "./DefaultLayout.styles";
 import { Outlet } from "react-router-dom";
-import ShoppingCartDropdown from "../components/ShoppingCart/Dropdown";
-import ShoppingCartIcon from "../components/ShoppingCart/Icon";
+import ShoppingCartDropdown from "components/ShoppingCart/Dropdown";
+import ShoppingCartIcon from "components/ShoppingCart/Icon";
 
-const DefaultLayout = () => {
+import type { FC } from "react";
+
+const DefaultLayout: FC = () => {
     const cartDropdownIsOpen = useSelector(selectCartDropdownIsOpen);
-    const userAuth = useSelector(selectUserAuth);
+    const userIsSignedIn = useSelector(selectUserIsSignedIn);
 
     return (<>
         <S.NavigationContainer>
@@ -22,7 +24,7 @@ const DefaultLayout = () => {
                 <S.NavLink to='/shop'>
                     SHOP
                 </S.NavLink>
-                { userAuth ? (
+                { userIsSignedIn ? (
                     <S.NavLink as='span' onClick={signOut}>
                         SIGN OUT
                     </S.NavLink>
@@ -30,10 +32,10 @@ const DefaultLayout = () => {
                     <S.NavLink to='/sign-in'>
                         SIGN IN
                     </S.NavLink>
-                )}
+                ) }
                 <ShoppingCartIcon />
             </S.NavLinkCollection>
-            {cartDropdownIsOpen && <ShoppingCartDropdown />}
+            { cartDropdownIsOpen && <ShoppingCartDropdown /> }
         </S.NavigationContainer>
         <Outlet />
     </>);
