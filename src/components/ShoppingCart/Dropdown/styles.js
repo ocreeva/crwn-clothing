@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Button } from "../../Button/styles";
+import { Button } from "components/Button/Button.styles";
 
 export const ShoppingCartDropdown = styled.div`
     position: absolute;
