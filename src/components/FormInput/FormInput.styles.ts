@@ -9,7 +9,7 @@ export const shrinkLabel = css`
     color: ${mainColor};
 `;
 
-export const InputLabel = styled.label`
+export const InputLabel = styled.label<{ $shrink?: boolean }>`
     color: ${subColor};
     font-size: 16px;
     font-weight: normal;
