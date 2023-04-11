@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
-import { toggleCartDropdown } from "../../../features/dropdown";
+import { toggleCartDropdown } from "features/dropdown";
 
 import { useSelector } from "react-redux";
-import { selectCartCount } from "../../../features/cart";
+import { selectCartCount } from "features/cart";
 
 import * as S from "./ShoppingCartIcon.styles";
 
