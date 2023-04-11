@@ -1,6 +1,8 @@
 import * as S from "./LoadingGlyph.styles";
 
-const LoadingGlyph = () => (
+import type { FC } from "react";
+
+const LoadingGlyph: FC = () => (
     <S.LoadingGlyph>
         <S.LoadingGlyphImage />
     </S.LoadingGlyph>

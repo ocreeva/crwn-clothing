@@ -1,6 +1,6 @@
 import * as S from './FormInput.styles';
 
-import { FC, InputHTMLAttributes } from 'react';
+import type { FC, InputHTMLAttributes } from 'react';
 
 type FormInputProps = {
     labelText: string;
