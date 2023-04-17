@@ -1,13 +1,16 @@
-import { useDispatch } from "react-redux";
-import { setRegistrationProperties } from "features/user/userSlice.reducers";
+import { useAppDispatch } from "App/hooks";
+import { setRegistrationProperties } from "features/user";
 
 import { useState } from "react";
 
-import { registerUserWithEmailAndPassword } from "../../../services/auth";
+import { registerUserWithEmailAndPassword } from "services/auth";
+import { FirebaseError } from "firebase/app";
 
-import * as S from "./styles";
-import Button from "../../../components/Button";
-import FormInput from "../../../components/FormInput";
+import * as S from "./RegistrationForm.styles";
+import Button from "components/Button";
+import FormInput from "components/FormInput";
+
+import type { ChangeEventHandler, FC, FormEventHandler } from "react";
 
 const defaultRegistration = {
     displayName: "",
@@ -16,13 +19,13 @@ const defaultRegistration = {
     confirmPassword: "",
 };
 
-const RegistrationForm = () => {
+const RegistrationForm: FC = () => {
     const [ registration, setRegistration ] = useState(defaultRegistration);
     const { displayName, email, password, confirmPassword } = registration;
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const handleSubmit = async (event) => {
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
 
         if (password !== confirmPassword) {
@@ -35,7 +38,7 @@ const RegistrationForm = () => {
             dispatch(setRegistrationProperties({ displayName }));
             await registerUserWithEmailAndPassword(email, password);
         } catch (error) {
-            if (error.code === 'auth/email-already-in-use') {
+            if (error instanceof FirebaseError && error.code === 'auth/email-already-in-use') {
                 alert("Email has already been registered.");
             } else {
                 console.log("Error in email/password registration", error);
@@ -43,7 +46,7 @@ const RegistrationForm = () => {
         }
     }
 
-    const handleChange = (event) => {
+    const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
         const { name, value } = event.target;
         setRegistration({ ...registration, [name]: value });
     }

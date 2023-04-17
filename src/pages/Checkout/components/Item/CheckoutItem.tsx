@@ -1,15 +1,22 @@
-import { useDispatch } from "react-redux";
-import { addItemToCart, clearItemFromCart, removeItemFromCart } from "../../../features/cart";
+import { useAppDispatch } from "App/hooks";
+import { addItemToCart, clearItemFromCart, removeItemFromCart } from "features/cart";
 
-import { useSelector } from "react-redux";
-import { selectProductById } from "../../../features/products";
+import { useAppSelector } from "App/hooks";
+import { selectProductById } from "features/products";
 
-import * as S from "./styles";
+import * as S from "./CheckoutItem.styles";
 
-const CheckoutItem = ({ productId, quantity }) => {
-    const { imageUrl, name, price } = useSelector(state => selectProductById(state, productId));
+import type { FC } from "react";
 
-    const dispatch = useDispatch();
+type CheckoutItemProps = {
+    productId: string;
+    quantity: number;
+}
+
+const CheckoutItem: FC<CheckoutItemProps> = ({ productId, quantity }) => {
+    const { imageUrl, name, price } = useAppSelector(state => selectProductById(state, productId));
+
+    const dispatch = useAppDispatch();
     const handleIncrement = () => dispatch(addItemToCart({ productId }));
     const handleDecrement = () => dispatch(removeItemFromCart({ productId }));
     const handleRemove = () => dispatch(clearItemFromCart({ productId }));

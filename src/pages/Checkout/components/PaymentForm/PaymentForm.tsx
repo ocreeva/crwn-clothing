@@ -1,23 +1,26 @@
 import { useState } from "react";
 
-import { useSelector } from "react-redux";
-import { selectCartTotal } from "../../../features/cart";
-import { selectUserData } from "../../../features/user";
+import { useAppSelector } from "App/hooks";
+import { selectCartTotal } from "features/cart";
+import { selectUserData } from "features/user";
 
 import * as S from "./PaymentForm.styles";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { ButtonType } from "../../../components/Button";
+import { ButtonType } from "components/Button";
 
-const PaymentForm = () => {
+import type { FC, FormEventHandler } from "react";
+import type { StripeCardElement } from "@stripe/stripe-js";
+
+const PaymentForm: FC = () => {
     const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
-    const cartTotal = useSelector(selectCartTotal);
-    const userData = useSelector(selectUserData);
+    const cartTotal = useAppSelector(selectCartTotal);
+    const userData = useAppSelector(selectUserData);
 
     const stripe = useStripe();
     const elements = useElements();
 
-    const handlePayment = async (event) => {
+    const handlePayment: FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
 
         if (!stripe || !elements) return;
@@ -40,9 +43,9 @@ const PaymentForm = () => {
                 client_secret,
                 {
                     payment_method: {
-                        card: elements.getElement(CardElement),
+                        card: elements.getElement(CardElement) as StripeCardElement,
                         billing_details: {
-                            name: userData ? userData.displayName : "Guest",
+                            name: userData && userData.displayName ? userData.displayName : "Guest",
                         },
                     },
                 }

@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux";
-import { selectCartItems, selectCartTotal } from "../../features/cart";
+import { selectCartItems, selectCartTotal } from "features/cart";
 
-import * as S from "./styles";
-import CheckoutItem from "./Item";
-import PaymentForm from "./PaymentForm";
+import * as S from "./CheckoutPage.styles";
+import CheckoutItem from "./components/Item";
+import PaymentForm from "./components/PaymentForm";
 
-const CheckoutPage = () => {
+import type { FC } from "react";
+
+const CheckoutPage: FC = () => {
     const items = useSelector(selectCartItems);
     const total = useSelector(selectCartTotal);
 

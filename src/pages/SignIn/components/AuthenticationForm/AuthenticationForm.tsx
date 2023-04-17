@@ -1,28 +1,31 @@
 import { useState } from "react";
 
-import { signInWithEmailAndPassword, signInWithGooglePopup } from "../../../services/auth";
+import { signInWithEmailAndPassword, signInWithGooglePopup } from "services/auth";
+import { FirebaseError } from "firebase/app";
 
-import * as S from "./styles";
-import Button, { ButtonType } from "../../../components/Button";
-import FormInput from "../../../components/FormInput";
+import * as S from "./AuthenticationForm.styles";
+import Button, { ButtonType } from "components/Button";
+import FormInput from "components/FormInput";
+
+import type { ChangeEventHandler, FC, FormEventHandler } from "react";
 
 const defaultAuthentication = {
     email: "",
     password: "",
 };
 
-const AuthenticationForm = () => {
+const AuthenticationForm: FC = () => {
     const [ authentication, setAuthentication ] = useState(defaultAuthentication);
     const { email, password } = authentication;
 
-    const handleSubmit = async (event) => {
+    const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
         event.preventDefault();
 
         try
         {
             await signInWithEmailAndPassword(email, password);
         } catch (error) {
-            if (error.code === 'auth/wrong-password') {
+            if (error instanceof FirebaseError && error.code === 'auth/wrong-password') {
                 alert("Incorrect email or password")
             } else {
                 console.log("Error in email/password authentication", error);
@@ -30,7 +33,7 @@ const AuthenticationForm = () => {
         }
     };
 
-    const handleChange = (event) => {
+    const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
         const { name, value } = event.target;
         setAuthentication({ ...authentication, [name]: value });
     };
